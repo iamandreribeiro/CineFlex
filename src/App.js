@@ -1,21 +1,22 @@
-import styled from "styled-components";
 import GlobalStyle from "./assets/css/GlobalStyles";
 import Header from "./Header";
 import MovieScreen from "./MovieScreen";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react";
+import SectionScreen from "./SectionScreen";
 
 export default function App() {
+    const [idFilme, setIdFilme] = useState("");
+
     return (
-        <>
+        <BrowserRouter>
             <GlobalStyle />
-            <StyledContainer>
-                <Header />
-                <MovieScreen />
-            </StyledContainer>
-        </>
+            <Header />
+            <Routes>
+                <Route path="/" element={<MovieScreen setIdFilme={setIdFilme} />} />
+                <Route path={`/sessoes/` + idFilme}
+                    element={<SectionScreen idFilme={idFilme}/>} />
+            </Routes>
+        </BrowserRouter>
     )
 };
-
-const StyledContainer = styled.div`
-    width: 100vw;
-    height: 100vh;  
-`

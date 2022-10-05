@@ -1,28 +1,36 @@
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 import axios from "axios";
+import { Link } from "react-router-dom";
 
-const URL = "https://mock-api.driven.com.br/api/v5/cineflex/movies";
-
-export default function MovieScreen() {
+export default function MovieScreen(props) {
     const [filmes, setFilmes] = useState([]);
+
+    const URL = "https://mock-api.driven.com.br/api/v4/cineflex/movies";
 
     useEffect(() => {
         const promise = axios.get(URL);
-        promise.then((n) => setFilmes(n.data));
-    }, [])
+        promise.then((f) => setFilmes(f.data));
+    }, []);
+
+    function pegaId(f) {
+        props.setIdFilme(f.id);
+    }
 
     return (
         <>
             <StyledTitle>
-                <h1>Selecione o Filme</h1>
+                <h1>Selecione o filme</h1>
             </StyledTitle>
             <StyledMovieScreen>
                 {
                     filmes.map((f) => {
                         return (
                             <StyledMovieContainer>
-                                <img id={f.id} src={f.posterURL} />
+                                <Link to={`/sessoes/`+f.id}>
+                                    <img id={f.id} src={f.posterURL}
+                                        onClick={() => pegaId(f)}  alt="f.title"/>
+                                </Link>
                             </StyledMovieContainer>
                         )
                     })
@@ -36,8 +44,8 @@ const StyledTitle = styled.div`
     height: 100px;
     width: 100vw;
     text-align: center;
-    margin-top: 80px;
     padding-top: 50px;
+    margin-top: 80px;
     h1 {
         font-size: 24px;
         font-weight: 400px;
