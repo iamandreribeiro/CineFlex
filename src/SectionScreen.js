@@ -5,7 +5,6 @@ import styled from "styled-components"
 
 export default function SectionScreen(props) {
     const [sessoes, setSessoes] = useState([]);
-    const [idSessao, setIdSessao] = useState("");
 
     const URL = `https://mock-api.driven.com.br/api/v4/cineflex/movies/` + props.idFilme + `/showtimes`;
 
@@ -15,8 +14,7 @@ export default function SectionScreen(props) {
     }, []);
 
     function pegaId(id) {
-        setIdSessao(id);
-        console.log(idSessao);
+        props.setIdSessao(id);
     }
 
     return (
@@ -32,7 +30,7 @@ export default function SectionScreen(props) {
                                 <h1>{s.weekday} - {s.date}</h1>
                                 {s.showtimes.map((d) => {
                                     return (
-                                        <Link>
+                                        <Link to={`/assentos/`+d.id}>
                                             <StyledButton onClick={() => pegaId(d.id)}>
                                                 {d.name}
                                             </StyledButton>
