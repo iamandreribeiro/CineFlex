@@ -6,15 +6,18 @@ import { Link } from "react-router-dom";
 export default function MovieScreen(props) {
     const [filmes, setFilmes] = useState([]);
 
-    const URL = "https://mock-api.driven.com.br/api/v4/cineflex/movies";
+    const URL = "https://mock-api.driven.com.br/api/v5/cineflex/movies";
 
     useEffect(() => {
         const promise = axios.get(URL);
-        promise.then((f) => setFilmes(f.data));
-    }, []);
+        promise.then((f) => {
+            setFilmes(f.data)
+        });
+    }, [URL]);
 
-    function pegaId(f) {
+    function pegaDados(f) {
         props.setIdFilme(f.id);
+        props.setNomeFilme(f.title);
     }
 
     return (
@@ -24,12 +27,12 @@ export default function MovieScreen(props) {
             </StyledTitle>
             <StyledMovieScreen>
                 {
-                    filmes.map((f) => {
+                    filmes.map((f, i) => {
                         return (
                             <StyledMovieContainer>
                                 <Link to={`/sessoes/`+f.id}>
-                                    <img id={f.id} src={f.posterURL}
-                                        onClick={() => pegaId(f)}  alt="f.title"/>
+                                    <img id={f.id} src={f.posterURL} key={i}
+                                        onClick={() => pegaDados(f)}  alt="f.title"/>
                                 </Link>
                             </StyledMovieContainer>
                         )

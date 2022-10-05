@@ -6,23 +6,24 @@ import styled from "styled-components"
 export default function SectionScreen(props) {
     const [sessoes, setSessoes] = useState([]);
 
-    const URL = `https://mock-api.driven.com.br/api/v4/cineflex/movies/` + props.idFilme + `/showtimes`;
+    const URL = `https://mock-api.driven.com.br/api/v5/cineflex/movies/`+ props.idFilme +`/showtimes`;
 
     useEffect(() => {
         const promise = axios.get(URL);
         promise.then((s) => setSessoes(s.data.days));
     }, []);
 
-    function pegaId(id) {
+    function pegaDados(id, date, time) {
         props.setIdSessao(id);
+        props.setDataFilme(date);
+        props.setHoraFilme(time);
     }
 
     return (
-        <>
+        <StyledContainer>
             <StyledTitle>
                 <h1>Selecione o horário</h1>
-            </StyledTitle>
-            <StyledSectionScreen>
+            </StyledTitle>            
                 {
                     sessoes.map((s) => {
                         return (
@@ -31,7 +32,7 @@ export default function SectionScreen(props) {
                                 {s.showtimes.map((d) => {
                                     return (
                                         <Link to={`/assentos/`+d.id}>
-                                            <StyledButton onClick={() => pegaId(d.id)}>
+                                            <StyledButton onClick={() => pegaDados(d.id, s.date, d.name)}>
                                                 {d.name}
                                             </StyledButton>
                                         </Link>
@@ -40,11 +41,15 @@ export default function SectionScreen(props) {
                             </StyledSectionContainer>
                         )
                     })
-                }
-            </StyledSectionScreen>
-        </>
+                }            
+        </StyledContainer>
     )
 };
+
+const StyledContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+`
 
 const StyledTitle = styled.div`
     height: 100px;
@@ -58,16 +63,13 @@ const StyledTitle = styled.div`
     }
 `
 
-const StyledSectionScreen = styled.div`
-    display: flex;
-    flex-direction: column;
-`
-
 const StyledSectionContainer = styled.div`
-    width: 100vw;
+    margin-bottom: 30px;
+    padding-left: 20px;
     h1 {
         font-Weight: 400;
         font-Size: 20px;
+        margin-bottom: 5px;
     }
 `
 

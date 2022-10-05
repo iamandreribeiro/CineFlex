@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components"
 
 const subTitles = [
@@ -11,21 +12,40 @@ const subTitles = [
 let reservar = [];
 
 export default function SeatsScreen(props) {
-    const URL = `https://mock-api.driven.com.br/api/v4/cineflex/showtimes/` + props.idSessao + `/seats`;
+    const URL = `https://mock-api.driven.com.br/api/v5/cineflex/showtimes/` + props.idSessao + `/seats`;
 
     const [assentos, setAssentos] = useState([]);
 
     useEffect(() => {
         const promise = axios.get(URL);
-        promise.then((s) => setAssentos(s.data.seats));
-    }, []);
+        promise.then((s) => {
+            setAssentos(s.data.seats);
+        });
+    }, [URL]);
 
     function selecionaAssento(a) {
-        if(a.isAvailable) reservar = [...props.selecionados, a.name];
+        if (a.isAvailable && !props.selecionados.includes(a.name)) {
+            reservar = [...props.selecionados, a.name];
+        } else alert("Esse assento não está disponível");
         props.setSelecionados(reservar);
+        console.log(props.selecionados);
     }
 
-    console.log(props.selecionados);
+    function preencheReserva() {
+        let reserva = {
+            ids: props.selecionados,
+            name: props.nome,
+            cpf: props.CPF
+        }
+
+        fazReserva(reserva);
+    }
+
+    function fazReserva(reserva) {
+        const URL = "https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many";
+        const promise = axios.post(URL, reserva);
+        promise.then((resposta) => console.log(resposta));
+    }
 
     return (
         <StyledContainer>
@@ -38,7 +58,9 @@ export default function SeatsScreen(props) {
                     assentos.map((a) => {
                         return (
                             <StyledSeatButton onClick={() => selecionaAssento(a)}
-                                color={a.isAvailable}>
+                                color={a.isAvailable}
+                                bgcolor={props.selecionados.includes(a.name)}
+                            >
                                 {a.name}
                             </StyledSeatButton>
                         )
@@ -61,15 +83,21 @@ export default function SeatsScreen(props) {
 
             <StyledInputContainer>
                 <h1>Nome do comprador:</h1>
-                <StyledInput placeholder="Digite seu nome..." />
+                <StyledInput placeholder="Digite seu nome..."
+                    onChange={(n) => props.setNome(n.target.value)} />
             </StyledInputContainer>
 
             <StyledInputContainer>
                 <h1>CPF do comprador:</h1>
-                <StyledInput placeholder="Digite seu CPF..." />
+                <StyledInput placeholder="Digite seu CPF..."
+                    onChange={(c) => props.setCPF(c.target.value)} />
             </StyledInputContainer>
 
-            <StyledButton>Reservar assentos</StyledButton>
+            <Link to="/reservado">
+                <StyledButton onClick={() => preencheReserva()}>
+                    Reservar assentos
+                </StyledButton>
+            </Link>
         </StyledContainer>
     )
 };
@@ -101,8 +129,8 @@ const StyledSeatsScreen = styled.div`
 `
 
 const StyledSeatButton = styled.button`
-    background-color: ${props => props.color ? "#C3CFD9" : "#FBE192"};
-    border: 1px solid ${props => props.color ? "#808F9D" : "#F7C52B"};
+    background-color: ${props => props.color ? props => props.bgcolor ? "#1AAE9E" : "#C3CFD9" : "#FBE192"};
+    border: 1px solid ${props => props.color ? props => props.bgcolor ? "#0E7D71" : "#808F9D" : "#F7C52B"};
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -161,5 +189,8 @@ const StyledButton = styled.button`
     :active {
         position: relative;
         top: 1px;
+    }
+    h1 {
+        font-size: 18px;
     }
 `
