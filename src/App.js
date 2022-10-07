@@ -14,6 +14,7 @@ export default function App() {
     const [dataFilme, setDataFilme] = useState("");
     const [horaFilme, setHoraFilme] = useState("");
     const [selecionados, setSelecionados] = useState([]);
+    const [assentos, setAssentos] = useState([]);
     const [nome, setNome] = useState("");
     const [CPF, setCPF] = useState([]);
 
@@ -22,20 +23,62 @@ export default function App() {
             <GlobalStyle />
             <Header />
             <Routes>
-                <Route path="/" element={<MovieScreen setIdFilme={setIdFilme}
-                    setNomeFilme={setNomeFilme} />} />
+                <Route
+                    key="1"
+                    path="/"
+                    element={
+                        <MovieScreen setIdFilme={setIdFilme} setNomeFilme={setNomeFilme} />
+                    }
+                />
 
-                <Route path={`/sessoes/` + idFilme}
-                    element={<SectionScreen idFilme={idFilme} setIdSessao={setIdSessao}
-                        setDataFilme={setDataFilme} setHoraFilme={setHoraFilme} />} />
+                <Route
+                    key="2"
+                    path={`/sessoes/` + idFilme}
+                    element={
+                        <SectionScreen
+                            key="2"
+                            idFilme={idFilme}
+                            setIdSessao={setIdSessao}
+                            setDataFilme={setDataFilme}
+                            setHoraFilme={setHoraFilme}
+                        />
+                    }
+                />
 
-                <Route path={`/assentos/` + idSessao} element={<SeatsScreen idSessao={idSessao}
-                    selecionados={selecionados} setSelecionados={setSelecionados}
-                    setNome={setNome} nome={nome} setCPF={setCPF} CPF={CPF}/>} />
+                <Route
+                    key="3"
+                    path={`/assentos/` + idSessao}
+                    element={
+                        <SeatsScreen
+                            idSessao={idSessao}
+                            selecionados={selecionados}
+                            setSelecionados={setSelecionados}
+                            setNome={setNome}
+                            nome={nome}
+                            setCPF={setCPF}
+                            CPF={CPF}
+                            assentos={assentos}
+                            setAssentos={setAssentos}
+                        />
+                    }
+                />
 
-                <Route path={"/reservado"} element={<ReservedScreen selecionados={selecionados}
-                    nomeFilme={nomeFilme} dataFilme={dataFilme} horaFilme={horaFilme}
-                    nome={nome} CPF={CPF} setSelecionados={setSelecionados}/>} />
+                <Route
+                    key="4"
+                    path={"/reservado"}
+                    element={
+                        <ReservedScreen
+                            selecionados={selecionados}
+                            nomeFilme={nomeFilme}
+                            dataFilme={dataFilme}
+                            horaFilme={horaFilme}
+                            nome={nome}
+                            CPF={CPF}
+                            setSelecionados={setSelecionados}
+                            assentos={assentos}
+                        />
+                    }
+                />
             </Routes>
         </BrowserRouter>
     )
