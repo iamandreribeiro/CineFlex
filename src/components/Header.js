@@ -10,11 +10,12 @@ export default function Header() {
 
 const StyledHeader = styled.div`
     background-color: #C3CFD9;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100vw;
     padding: 30px;
     text-align: center;
-    position: fixed;
-    top: 0;
     h1 {
         color: #E8833A;
         font-size: 34px;

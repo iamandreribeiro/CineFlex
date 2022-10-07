@@ -113,6 +113,7 @@ const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 128px;
 `;
 
 const StyledTitle = styled.div`
@@ -132,7 +133,6 @@ const StyledSeatsScreen = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding-left: 10px;
 `;
 
 const StyledSubTitle = styled.div`

@@ -39,6 +39,7 @@ export default function SectionScreen(props) {
 const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 128px;
 `;
 
 const StyledTitle = styled.div`
