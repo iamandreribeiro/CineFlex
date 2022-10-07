@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default function MovieScreen(props) {
     const [filmes, setFilmes] = useState([]);
 
-    const URL = "https://mock-api.driven.com.br/api/v5/cineflex/movies";
+    const URL = "https://mock-api.driven.com.br/api/v8/cineflex/movies";
 
     useEffect(() => {
         const promise = axios.get(URL);

@@ -6,7 +6,7 @@ import styled from "styled-components"
 export default function SectionScreen(props) {
     const [sessoes, setSessoes] = useState([]);
 
-    const URL = `https://mock-api.driven.com.br/api/v5/cineflex/movies/`+ props.idFilme +`/showtimes`;
+    const URL = `https://mock-api.driven.com.br/api/v8/cineflex/movies/`+ props.idFilme +`/showtimes`;
 
     useEffect(() => {
         const promise = axios.get(URL);

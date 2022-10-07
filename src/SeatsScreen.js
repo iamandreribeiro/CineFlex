@@ -12,7 +12,7 @@ const subTitles = [
 let reservar = [];
 
 export default function SeatsScreen(props) {
-    const URL = `https://mock-api.driven.com.br/api/v5/cineflex/showtimes/` + props.idSessao + `/seats`;
+    const URL = `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/` + props.idSessao + `/seats`;
 
     const [assentos, setAssentos] = useState([]);
 
@@ -42,7 +42,7 @@ export default function SeatsScreen(props) {
     }
 
     function fazReserva(reserva) {
-        const URL = "https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many";
+        const URL = "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many";
         const promise = axios.post(URL, reserva);
         promise.then((resposta) => console.log(resposta));
     }
