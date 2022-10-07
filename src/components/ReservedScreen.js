@@ -5,30 +5,30 @@ export default function ReservedScreen(props) {
 
     return (
         <StyledContainer>
-      <StyledTitle>
-        <h1>Pedido feito com sucesso!</h1>
-      </StyledTitle>
-      <StyledBookingContainer>
-        <h2>Filme e sessão</h2>
-        <h1>{props.nomeFilme}</h1>
-        <h1>
-          {props.dataFilme} {props.horaFilme}
-        </h1>
-        <h2>Ingressos</h2>
-        {props.assentos.map((s) => {
-          return <h1>Assento {s}</h1>;
-        })}
-        <h2>Comprador</h2>
-        <h1>Nome: {props.nome}</h1>
-        <h1>CPF: {props.CPF}</h1>
-      </StyledBookingContainer>
-      <StyledButton onClick={() => props.setSelecionados([])}>
-        <StyledLink to="/">
-          <h1>Voltar para home</h1>
-        </StyledLink>
-      </StyledButton>
-    </StyledContainer>
-  );
+            <StyledTitle>
+                <h1>Pedido feito com sucesso!</h1>
+            </StyledTitle>
+            <StyledBookingContainer>
+                <h2>Filme e sessão</h2>
+                <h1>{props.nomeFilme}</h1>
+                <h1>
+                    {props.dataFilme} {props.horaFilme}
+                </h1>
+                <h2>Ingressos</h2>
+                {props.numAssentos.map((s) => {
+                    return <h1>Assento {s}</h1>;
+                })}
+                <h2>Comprador</h2>
+                <h1>Nome: {props.nome}</h1>
+                <h1>CPF: {props.CPF}</h1>
+            </StyledBookingContainer>
+            <StyledButton onClick={() => props.setIdAssentos([])}>
+                <StyledLink to="/">
+                    <h1>Voltar para home</h1>
+                </StyledLink>
+            </StyledButton>
+        </StyledContainer>
+    );
 }
 
 const StyledContainer = styled.div`

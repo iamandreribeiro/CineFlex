@@ -1,10 +1,10 @@
-import Header from "./Header";
-import MovieScreen from "./MovieScreen";
+import Header from "./components/Header";
+import MovieScreen from "./components/MovieScreen";
+import SectionScreen from "./components/SectionScreen";
+import SeatsScreen from "./components/SeatsScreen";
+import ReservedScreen from "./components/ReservedScreen";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
-import SectionScreen from "./SectionScreen";
-import SeatsScreen from "./SeatsScreen";
-import ReservedScreen from "./ReservedScreen";
 import GlobalStyle from "./assets/css/GlobalStyles";
 
 export default function App() {
@@ -13,8 +13,8 @@ export default function App() {
     const [nomeFilme, setNomeFilme] = useState("");
     const [dataFilme, setDataFilme] = useState("");
     const [horaFilme, setHoraFilme] = useState("");
-    const [selecionados, setSelecionados] = useState([]);
-    const [assentos, setAssentos] = useState([]);
+    const [idAssentos, setIdAssentos] = useState([]);
+    const [numAssentos, setNumAssentos] = useState([]);
     const [nome, setNome] = useState("");
     const [CPF, setCPF] = useState([]);
 
@@ -51,14 +51,14 @@ export default function App() {
                     element={
                         <SeatsScreen
                             idSessao={idSessao}
-                            selecionados={selecionados}
-                            setSelecionados={setSelecionados}
+                            idAssentos={idAssentos}
+                            setIdAssentos={setIdAssentos}
                             setNome={setNome}
                             nome={nome}
                             setCPF={setCPF}
                             CPF={CPF}
-                            assentos={assentos}
-                            setAssentos={setAssentos}
+                            numAssentos={numAssentos}
+                            setNumAssentos={setNumAssentos}
                         />
                     }
                 />
@@ -68,14 +68,14 @@ export default function App() {
                     path={"/reservado"}
                     element={
                         <ReservedScreen
-                            selecionados={selecionados}
+                            idAssentos={idAssentos}
+                            setIdAssentos={setIdAssentos}
+                            numAssentos={numAssentos}
                             nomeFilme={nomeFilme}
                             dataFilme={dataFilme}
                             horaFilme={horaFilme}
                             nome={nome}
                             CPF={CPF}
-                            setSelecionados={setSelecionados}
-                            assentos={assentos}
                         />
                     }
                 />
