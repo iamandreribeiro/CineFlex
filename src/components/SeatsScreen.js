@@ -91,6 +91,7 @@ export default function SeatsScreen(props) {
                 <StyledInput
                     placeholder="Digite seu nome..."
                     onChange={(n) => props.setNome(n.target.value)}
+                    data-identifier="buyer-name-input"
                 />
             </StyledInputContainer>
 
@@ -99,10 +100,11 @@ export default function SeatsScreen(props) {
                 <StyledInput
                     placeholder="Digite seu CPF..."
                     onChange={(c) => props.setCPF(c.target.value)}
+                    data-identifier="buyer-cpf-input"
                 />
             </StyledInputContainer>
 
-            <StyledButton onClick={() => preencheReserva()}>
+            <StyledButton onClick={() => preencheReserva()} data-identifier="reservation-btn">
                 Reservar assentos
             </StyledButton>
         </StyledContainer>
