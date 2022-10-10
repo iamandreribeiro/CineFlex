@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 export default function Sections(props) {
     return (
         <StyledSectionContainer key={props.i}>
-            <h1>
+            <h data-identifier="session-date">
                 {props.s.weekday} - {props.s.date}
             </h1>
             {props.s.showtimes.map((d) => {
                 return (
                     <Link to={`/assentos/` + d.id}>
-                        <StyledButton
+                        <StyledButton data-identifier="hour-minute-btn"
                             onClick={() => {
                                 props.setIdSessao(d.id);
                                 props.setHoraFilme(d.name);
