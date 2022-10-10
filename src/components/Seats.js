@@ -7,6 +7,7 @@ export default function Seats(props) {
             onClick={() => props.selecionaAssento(props.a)}
             color={props.isAvailable}
             bgcolor={props.idAssentos.includes(props.id)}
+            data-identifier="seat"
         >
             {props.name}
         </StyledSeatButton>
