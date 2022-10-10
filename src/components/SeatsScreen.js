@@ -5,9 +5,9 @@ import styled from "styled-components"
 import Seats from "./Seats";
 
 const subTitles = [
-    { title: "Selecionado", bgcolor: "#1AAE9E", border: "#0E7D71" },
-    { title: "Disponível", bgcolor: "#C3CFD9", border: "#7B8B99" },
-    { title: "Indisponível", bgcolor: "#FBE192", border: "#F7C52B" }
+    { title: "Selecionado", bgcolor: "#1AAE9E", border: "#0E7D71", data: "seat-selected-subtitle"},
+    { title: "Disponível", bgcolor: "#C3CFD9", border: "#7B8B99", data: "seat-available-subtitle"},
+    { title: "Indisponível", bgcolor: "#FBE192", border: "#F7C52B", data: "seat-unavailable-subtitle"}
 ];
 
 let assentosId = [];
@@ -79,7 +79,7 @@ export default function SeatsScreen(props) {
                 {subTitles.map((s, i) => {
                     return (
                         <StyledIcon key={i}>
-                            <StyledCircle bgcolor={s.bgcolor} border={s.border} />
+                            <StyledCircle bgcolor={s.bgcolor} border={s.border} data-identifier={s.data}/>
                             <h1>{s.title}</h1>
                         </StyledIcon>
                     );
