@@ -5,11 +5,11 @@ export default function Footer(props) {
         <StyledFooter>
             <StyledContainer>
                 <StyledMovieContainer>
-                    <img src={props.imgFilme} />
+                    <img src={props.imgFilme} data-identifier="movie-img-preview"/>
                 </StyledMovieContainer>
                 <StyledTextContainer>
-                    <h1>{props.nomeFilme}</h1>
-                    <h1>{props.dataFilme} {props.horaFilme}</h1>
+                    <h1 data-identifier="movie-and-session-infos-preview">{props.nomeFilme}</h1>
+                    <h1 data-identifier="movie-and-session-infos-preview">{props.dataFilme} {props.horaFilme}</h1>
                 </StyledTextContainer>
             </StyledContainer>
         </StyledFooter>
