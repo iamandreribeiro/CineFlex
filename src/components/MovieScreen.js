@@ -29,7 +29,7 @@ export default function MovieScreen(props) {
             <StyledMovieScreen>
                 {filmes.map((f, index) => {
                     return (
-                        <StyledMovieContainer key={index}>
+                        <StyledMovieContainer data-identifier="movie-outdoor" key={index}>
                             <Link to={`/sessoes/` + f.id}>
                                 <img
                                     src={f.posterURL}
