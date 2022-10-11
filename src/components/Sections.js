@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function Sections(props) {
     return (
         <StyledSectionContainer key={props.i}>
-            <h data-identifier="session-date">
+            <h1 data-identifier="session-date">
                 {props.s.weekday} - {props.s.date}
             </h1>
             {props.s.showtimes.map((d) => {
