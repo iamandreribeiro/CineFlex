@@ -33,6 +33,9 @@ export default function SeatsScreen(props) {
         if (a.isAvailable && !props.numAssentos.includes(a.name)) {
             assentosId = [...props.idAssentos, a.id];
             assentosNum = [...props.numAssentos, a.name];
+        } else if (a.isAvailable && props.numAssentos.includes(a.name)){
+            assentosId.filter((x) => x != a.id);
+            assentosNum.filter((x) => x != a.name);
         } else alert("Esse assento não está disponível");
 
         props.setIdAssentos(assentosId);
